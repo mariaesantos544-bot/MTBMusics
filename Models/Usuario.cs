@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MTBMusics.Models;
 
+[Table("Usuario")]
 [Index("Email", Name = "UQ__Usuario__A9D10534CB621646", IsUnique = true)]
 public partial class Usuario
 {

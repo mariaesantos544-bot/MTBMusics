@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using MTBMusics.Models;
 using Microsoft.EntityFrameworkCore;
+using MTBMusics.Models;
 
-namespace MTBMusics.BdContextEvent;
+namespace MTBMusics.Context;
 
-public partial class EventContext : DbContext
+public partial class MTBMusicsContext : DbContext
 {
-    public EventContext()
+    public MTBMusicsContext()
     {
     }
 
-    public EventContext(DbContextOptions<EventContext> options)
+    public MTBMusicsContext(DbContextOptions<MTBMusicsContext> options)
         : base(options)
     {
     }
@@ -23,8 +23,12 @@ public partial class EventContext : DbContext
     public virtual DbSet<Usuario> Usuario { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=D09S20-1252894\\SQLEXPRESS2;Database=MTBMusics;User Id=sa;Password=Senai@134;TrustServerCertificate=True;");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=D09S20-1252894\\SQLEXPRESS2;Database=MTBMusics;User Id=sa;Password=Senai@134;TrustServerCertificate=True;");
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
